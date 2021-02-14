@@ -31,7 +31,7 @@ int main(void) {
 #if EXTENSION_MODBUS
 //  static LoxLegacyModbusExtension gLoxLegacyModbusExtension(gLoxCANDriver, serial_base);
 #endif
-  static LoxBusDIExtension gDIExtension(gLoxCANDriver, serial_base, gResetReason);
+  //static LoxBusDIExtension gDIExtension(gLoxCANDriver, serial_base, gResetReason);
   static LoxLegacyRelayExtension gRelayExtension(gLoxCANDriver, serial_base);
   //static LoxLegacyDMXExtension gDMXExtension(gLoxCANDriver, serial_base);
   //static LoxBusTreeExtension gTreeExtension(gLoxCANDriver, serial_base, gResetReason);
