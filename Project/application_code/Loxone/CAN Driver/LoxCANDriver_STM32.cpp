@@ -266,7 +266,7 @@ extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef *hcan) {
     };
     HAL_GPIO_Init(CAN_GPIO_PORT, &gpioTX);
 
-    __HAL_AFIO_REMAP_CAN1_2();
+    __HAL_AFIO_REMAP_CAN1_1();
 
     // interrupt init for CAN
     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
