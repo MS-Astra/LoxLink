@@ -12,9 +12,9 @@
 #include <__cross_studio_io.h>
 #include <string.h>
 
-#define CAN_GPIO_PORT GPIOB
-#define CAN_RX_GPIO_PIN GPIO_PIN_8
-#define CAN_TX_GPIO_PIN GPIO_PIN_9
+#define CAN_GPIO_PORT GPIOA
+#define CAN_RX_GPIO_PIN GPIO_PIN_11
+#define CAN_TX_GPIO_PIN GPIO_PIN_12
 
 static CAN_HandleTypeDef gCan;
 static LoxCANDriver_STM32 *gCANDriver;
@@ -251,7 +251,7 @@ extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef *hcan) {
   if (hcan->Instance == CAN1) {
 
     __HAL_RCC_CAN1_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     GPIO_InitTypeDef gpioRX = {
         .Pin = CAN_RX_GPIO_PIN,
@@ -266,7 +266,7 @@ extern "C" void HAL_CAN_MspInit(CAN_HandleTypeDef *hcan) {
     };
     HAL_GPIO_Init(CAN_GPIO_PORT, &gpioTX);
 
-    __HAL_AFIO_REMAP_CAN1_2();
+    __HAL_AFIO_REMAP_CAN1_1();
 
     // interrupt init for CAN
     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);

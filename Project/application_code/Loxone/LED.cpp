@@ -20,20 +20,20 @@ LED gLED;
 static void LED_on_off(eLED_color color) {
   switch (color) {
   case eLED_green: // right LED on
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_1, GPIO_PIN_RESET);
     break;
   case eLED_orange: // left LED on
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_1, GPIO_PIN_SET);
     break;
   case eLED_red: // both LEDs on
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_1, GPIO_PIN_RESET);
     break;
   default: // both LEDs off
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_1, GPIO_PIN_SET);
   }
 }
 
@@ -92,21 +92,21 @@ void LED::vLEDTask(void *pvParameters) {
 }
 
 void LED::Startup(void) {
-  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
 
   GPIO_InitTypeDef GPIO_Init;
   // 2 LEDs as outputs
-  GPIO_Init.Pin = GPIO_PIN_13 | GPIO_PIN_14;
+  GPIO_Init.Pin = GPIO_PIN_0 | GPIO_PIN_1;
   GPIO_Init.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_Init.Pull = GPIO_NOPULL;
   GPIO_Init.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_Init);
+  HAL_GPIO_Init(GPIOE, &GPIO_Init);
 
   // 2 buttons as inputs
-  GPIO_Init.Pin = GPIO_PIN_1 | GPIO_PIN_15;
+  GPIO_Init.Pin = GPIO_PIN_4 | GPIO_PIN_5;
   GPIO_Init.Mode = GPIO_MODE_INPUT;
   GPIO_Init.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOB, &GPIO_Init);
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
 
   #define STACKSIZE 128          
   static unsigned stack[1+STACKSIZE+1];
